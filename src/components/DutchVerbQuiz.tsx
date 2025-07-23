@@ -22,8 +22,9 @@ export const DutchVerbQuiz = () => {
     setShuffledVerbs(shuffled);
   };
 
-  const handleNext = () => {
+  const handleNext = (questionScore: number) => {
     setAnsweredQuestions(prev => prev + 1);
+    setScore(prev => prev + questionScore);
     
     if (currentVerbIndex < shuffledVerbs.length - 1) {
       setCurrentVerbIndex(prev => prev + 1);
@@ -38,12 +39,6 @@ export const DutchVerbQuiz = () => {
     setScore(0);
     setAnsweredQuestions(0);
     setShowStats(false);
-  };
-
-  const updateScore = (correct: boolean) => {
-    if (correct) {
-      setScore(prev => prev + 1);
-    }
   };
 
   if (shuffledVerbs.length === 0) {

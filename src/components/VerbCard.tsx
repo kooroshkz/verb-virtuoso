@@ -7,7 +7,7 @@ import { DutchVerb } from "@/data/verbs";
 
 interface VerbCardProps {
   verb: DutchVerb;
-  onNext: () => void;
+  onNext: (score: number) => void;
   showScore?: boolean;
   currentScore?: number;
   totalQuestions?: number;
@@ -15,33 +15,41 @@ interface VerbCardProps {
 
 export const VerbCard = ({ verb, onNext, showScore, currentScore, totalQuestions }: VerbCardProps) => {
   const [perfectumAnswer, setPerfectumAnswer] = useState("");
-  const [imperfectumAnswer, setImperfectumAnswer] = useState("");
+  const [imperfectumSingular, setImperfectumSingular] = useState("");
+  const [imperfectumPlural, setImperfectumPlural] = useState("");
   const [showResults, setShowResults] = useState(false);
-  const [isCorrect, setIsCorrect] = useState({ perfectum: false, imperfectum: false });
+  const [isCorrect, setIsCorrect] = useState({ 
+    perfectum: false, 
+    imperfectumSingular: false, 
+    imperfectumPlural: false 
+  });
 
   const checkAnswers = () => {
     const perfectumCorrect = perfectumAnswer.toLowerCase().trim() === verb.perfectum.toLowerCase();
-    const imperfectumCorrect = verb.imperfectum.some(
-      form => imperfectumAnswer.toLowerCase().trim() === form.toLowerCase()
-    );
+    const imperfectumSingularCorrect = imperfectumSingular.toLowerCase().trim() === verb.imperfectum[0].toLowerCase();
+    const imperfectumPluralCorrect = imperfectumPlural.toLowerCase().trim() === verb.imperfectum[1].toLowerCase();
     
     setIsCorrect({
       perfectum: perfectumCorrect,
-      imperfectum: imperfectumCorrect
+      imperfectumSingular: imperfectumSingularCorrect,
+      imperfectumPlural: imperfectumPluralCorrect
     });
     setShowResults(true);
   };
 
   const resetCard = () => {
     setPerfectumAnswer("");
-    setImperfectumAnswer("");
+    setImperfectumSingular("");
+    setImperfectumPlural("");
     setShowResults(false);
-    setIsCorrect({ perfectum: false, imperfectum: false });
+    setIsCorrect({ perfectum: false, imperfectumSingular: false, imperfectumPlural: false });
   };
 
   const handleNext = () => {
+    // Calculate score: all three answers need to be correct for full points
+    const score = (isCorrect.perfectum && isCorrect.imperfectumSingular && isCorrect.imperfectumPlural) ? 1 : 0;
     resetCard();
-    onNext();
+    onNext(score);
   };
 
   return (
@@ -68,7 +76,7 @@ export const VerbCard = ({ verb, onNext, showScore, currentScore, totalQuestions
           {/* Perfectum */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground">
-              Present Perfect (Perfectum)
+              Perfectum
             </label>
             <div className="relative">
               <Input
@@ -101,40 +109,84 @@ export const VerbCard = ({ verb, onNext, showScore, currentScore, totalQuestions
             )}
           </div>
 
-          {/* Imperfectum */}
-          <div className="space-y-2">
+          {/* Imperfectum - Horizontal Layout */}
+          <div className="space-y-3">
             <label className="text-sm font-medium text-foreground">
-              Simple Past (Imperfectum)
+              Imperfectum
             </label>
-            <div className="relative">
-              <Input
-                value={imperfectumAnswer}
-                onChange={(e) => setImperfectumAnswer(e.target.value)}
-                placeholder="e.g., werkte"
-                disabled={showResults}
-                className={`transition-all duration-300 ${
-                  showResults
-                    ? isCorrect.imperfectum
-                      ? "border-correct bg-correct/5"
-                      : "border-incorrect bg-incorrect/5"
-                    : "border-border"
-                }`}
-              />
-              {showResults && (
-                <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                  {isCorrect.imperfectum ? (
-                    <CheckCircle className="h-5 w-5 text-correct" />
-                  ) : (
-                    <XCircle className="h-5 w-5 text-incorrect" />
+            <div className="grid grid-cols-2 gap-4">
+              {/* Singular */}
+              <div className="space-y-2">
+                <label className="text-xs text-muted-foreground">
+                  Singular
+                </label>
+                <div className="relative">
+                  <Input
+                    value={imperfectumSingular}
+                    onChange={(e) => setImperfectumSingular(e.target.value)}
+                    placeholder="e.g., werkte"
+                    disabled={showResults}
+                    className={`transition-all duration-300 ${
+                      showResults
+                        ? isCorrect.imperfectumSingular
+                          ? "border-correct bg-correct/5"
+                          : "border-incorrect bg-incorrect/5"
+                        : "border-border"
+                    }`}
+                  />
+                  {showResults && (
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                      {isCorrect.imperfectumSingular ? (
+                        <CheckCircle className="h-4 w-4 text-correct" />
+                      ) : (
+                        <XCircle className="h-4 w-4 text-incorrect" />
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
+                {showResults && !isCorrect.imperfectumSingular && (
+                  <p className="text-xs text-incorrect">
+                    Correct: <span className="font-medium">{verb.imperfectum[0]}</span>
+                  </p>
+                )}
+              </div>
+
+              {/* Plural */}
+              <div className="space-y-2">
+                <label className="text-xs text-muted-foreground">
+                  Plural
+                </label>
+                <div className="relative">
+                  <Input
+                    value={imperfectumPlural}
+                    onChange={(e) => setImperfectumPlural(e.target.value)}
+                    placeholder="e.g., werkten"
+                    disabled={showResults}
+                    className={`transition-all duration-300 ${
+                      showResults
+                        ? isCorrect.imperfectumPlural
+                          ? "border-correct bg-correct/5"
+                          : "border-incorrect bg-incorrect/5"
+                        : "border-border"
+                    }`}
+                  />
+                  {showResults && (
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                      {isCorrect.imperfectumPlural ? (
+                        <CheckCircle className="h-4 w-4 text-correct" />
+                      ) : (
+                        <XCircle className="h-4 w-4 text-incorrect" />
+                      )}
+                    </div>
+                  )}
+                </div>
+                {showResults && !isCorrect.imperfectumPlural && (
+                  <p className="text-xs text-incorrect">
+                    Correct: <span className="font-medium">{verb.imperfectum[1]}</span>
+                  </p>
+                )}
+              </div>
             </div>
-            {showResults && !isCorrect.imperfectum && (
-              <p className="text-sm text-incorrect">
-                Correct answers: <span className="font-medium">{verb.imperfectum.join(", ")}</span>
-              </p>
-            )}
           </div>
         </div>
 
@@ -142,7 +194,7 @@ export const VerbCard = ({ verb, onNext, showScore, currentScore, totalQuestions
           {!showResults ? (
             <Button 
               onClick={checkAnswers}
-              disabled={!perfectumAnswer || !imperfectumAnswer}
+              disabled={!perfectumAnswer || !imperfectumSingular || !imperfectumPlural}
               className="flex-1 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 transition-all duration-300"
             >
               Check Answers
