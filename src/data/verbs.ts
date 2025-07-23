@@ -49,5 +49,40 @@ export const dutchVerbs: DutchVerb[] = [
     infinitive: "hebben",
     perfectum: "heb gehad",
     imperfectum: ["had", "hadden"]
+  },
+  {
+    infinitive: "dansen",
+    perfectum: "heb gedanst",
+    imperfectum: ["danste", "dansten"]
+  },
+  {
+    infinitive: "spelen",
+    perfectum: "heb gespeeld",
+    imperfectum: ["speelde", "speelden"]
+  },
+  {
+    infinitive: "maken",
+    perfectum: "heb gemaakt",
+    imperfectum: ["maakte", "maakten"]
+  },
+  {
+    infinitive: "missen",
+    perfectum: "heb gemist",
+    imperfectum: ["miste", "misten"]
+  },
+  {
+    infinitive: "luisteren",
+    perfectum: "heb geluisterd",
+    imperfectum: ["luisterde", "luisterden"]
+  },
+  {
+    infinitive: "vertellen",
+    perfectum: "heb verteld",
+    imperfectum: ["vertelde", "vertelden"]
+  },
+  {
+    infinitive: "fietsen",
+    perfectum: "heb gefietst",
+    imperfectum: ["fietste", "fietsten"]
   }
 ];
