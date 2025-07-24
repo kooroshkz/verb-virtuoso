@@ -174,5 +174,25 @@ export const dutchVerbs: DutchVerb[] = [
     infinitive: "zien",
     perfectum: "heb gezien",
     imperfectum: ["zag", "zagen"]
+  },
+  {
+    infinitive: "krijgen",
+    perfectum: "heb gekregen",
+    imperfectum: ["kreeg", "kregen"]
+  },
+  {
+    infinitive: "opeten",
+    perfectum: "heb opgegeten",
+    imperfectum: ["at op", "aten op"]
+  },
+  {
+    infinitive: "kunnen",
+    perfectum: "heb gekund",
+    imperfectum: ["kon", "konden"]
+  },
+  {
+    infinitive: "geloven",
+    perfectum: "heb geloofd",
+    imperfectum: ["geloofde", "geloofden"]
   }
 ];
