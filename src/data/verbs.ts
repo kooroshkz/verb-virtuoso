@@ -84,5 +84,95 @@ export const dutchVerbs: DutchVerb[] = [
     infinitive: "fietsen",
     perfectum: "heb gefietst",
     imperfectum: ["fietste", "fietsten"]
+  },
+  {
+    infinitive: "kijken",
+    perfectum: "heb gekeken",
+    imperfectum: ["keek", "keken"]
+  },
+  {
+    infinitive: "gaan",
+    perfectum: "ben gegaan",
+    imperfectum: ["ging", "gingen"]
+  },
+  {
+    infinitive: "komen",
+    perfectum: "ben gekomen",
+    imperfectum: ["kwam", "kwamen"]
+  },
+  {
+    infinitive: "eten",
+    perfectum: "heb gegeten",
+    imperfectum: ["at", "aten"]
+  },
+  {
+    infinitive: "drinken",
+    perfectum: "heb gedronken",
+    imperfectum: ["dronk", "dronken"]
+  },
+  {
+    infinitive: "houden",
+    perfectum: "heb gehouden",
+    imperfectum: ["hield", "hielden"]
+  },
+  {
+    infinitive: "begrijpen",
+    perfectum: "heb begrepen",
+    imperfectum: ["begrijp", "begrijpen"]
+  },
+  {
+    infinitive: "denken",
+    perfectum: "heb gedacht",
+    imperfectum: ["dacht", "dachten"]
+  },
+  {
+    infinitive: "helpen",
+    perfectum: "heb geholpen",
+    imperfectum: ["helpte", "hielpen"]
+  },
+  {
+    infinitive: "kopen",
+    perfectum: "heb gekocht",
+    imperfectum: ["kocht", "kopen"]
+  },
+  {
+    infinitive: "moeten",
+    perfectum: "heb moeten",
+    imperfectum: ["moest", "moesten"]
+  },
+  {
+    infinitive: "mogen",
+    perfectum: "heb mogen",
+    imperfectum: ["mocht", "mochten"]
+  },
+  {
+    infinitive: "namen",
+    perfectum: "heb genoemd",
+    imperfectum: ["noemde", "noemden"]
+  },
+  {
+    infinitive: "zullen",
+    perfectum: "heb zullen",
+    imperfectum: ["zou", "zouden"]
+  },
+  {
+    infinitive: "vinden",
+    perfectum: "heb gevonden",
+    imperfectum: ["vond", "vonden"]
+  },
+  {
+    infinitive: "vragen",
+    perfectum: "heb gevraagd",
+    imperfectum: ["vroeg", "vragen"]
+  },
+  {
+    infinitive: "weten",
+    perfectum: "heb geweten",
+    imperfectum: ["wist", "wisten"]
+  },
+  {
+    infinitive: "zien",
+    perfectum: "heb gezien",
+    imperfectum: ["zag", "zagen"]
   }
 ];
